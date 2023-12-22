@@ -3,8 +3,16 @@ import { Box } from "@chakra-ui/react";
 
 function Homepage() {
   const [introList, setIntroList] = useState([
+    "hi",
+    "hI",
     "Hi",
-    "I am a Software Engineer",
+    "Hi I",
+    "Hi I am",
+    "Hi I am A",
+    "Hi I am a software",
+    "Hi I am a Software",
+    "Hi I am a Software engineer",
+    "Hi I am a Software Engineer",
   ]);
 
   const [currentText, setCurrentText] = useState("");
@@ -13,11 +21,7 @@ function Homepage() {
   useEffect(() => {
     const intervalId = setInterval(() => {
       const text = introList[currentIndex];
-      setCurrentText((prevText) => {
-        const nextChar = text.charAt(prevText.length);
-        return prevText + (nextChar === " " ? " " : nextChar); // Preserve spaces
-      });
-
+      setCurrentText((prevText) => prevText + text.charAt(prevText.length));
       if (currentText === text) {
         clearInterval(intervalId);
         setTimeout(() => {
