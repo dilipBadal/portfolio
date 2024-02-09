@@ -12,7 +12,7 @@ function Homepage() {
       height={"100vh"}
       color={"#fff"}
     >
-      <Box><Typewriter text="Hi, I am Dilip. I'm a Software Developer."  delay={100} /></Box>
+      <Box><Typewriter text="Hi, I am Dilip and I'm a Software Developer."  delay={100} /></Box>
     </Box>
   );
 }
