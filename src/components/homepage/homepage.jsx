@@ -4,15 +4,13 @@ import { Box } from "@chakra-ui/react";
 function Homepage() {
   const [introList, setIntroList] = useState([
     "hi",
-    "hI",
     "Hi",
-    "Hi I",
     "Hi I am",
     "Hi I am A",
     "Hi I am a software",
     "Hi I am a Software",
-    "Hi I am a Software engineer",
-    "Hi I am a Software Engineer",
+    "Hi I am a Software Developer",
+    "Hi I am a Software Developer",
   ]);
 
   const [currentText, setCurrentText] = useState("");
