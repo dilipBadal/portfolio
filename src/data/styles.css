@@ -1,0 +1,25 @@
+:root {
+    /* defaults to light; dark overrides below */
+    --bg-color: #ffffff;
+    --surface-color: #fafafa;
+    --primary-color: #111827;
+    --secondary-color: #4b5563;
+    --tertiary-color: #6b7280;
+    --quaternary-color: #e5e7eb;
+    --link-color: #0ea5a4;
+
+    /* fonts */
+    --primary-font: "Heebo", sans-serif;
+    --secondary-font: "Roboto", sans-serif;
+}
+
+/* dark theme overrides */
+[data-theme="dark"] {
+    --bg-color: #0b0b0e;
+    --surface-color: #131318;
+    --primary-color: #e5e7eb;
+    --secondary-color: #a1a1aa;
+    --tertiary-color: #71717a;
+    --quaternary-color: #27272a;
+    --link-color: #14b8a6;
+}
