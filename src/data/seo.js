@@ -2,31 +2,29 @@ const SEO = [
 	{
 		page: "home",
 		description:
-			"Software developer crafting reliable, user-centered web applications and experiences.",
-		keywords: ["Dilip", "Dilip Badal", "Software Developer", "Portfolio"],
+			"Dilip Badal | Full-Stack Engineer specializing in scalable web and mobile architecture, Node.js, and Data Science.",
+		keywords: ["Dilip", "Dilip Badal", "Full Stack Engineer", "Paris Developer", "React Native", "Data Science"],
 	},
 
 	{
 		page: "about",
 		description:
-			"I build thoughtful, reliable software and enjoy solving complex problems.",
-		keywords: ["Dilip", "Dilip Badal", "About", "Engineer"],
+			"Learn more about Dilip Badal, a Full-Stack Engineer and Data Science student at EDC Paris, dedicated to building impact-driven digital solutions.",
+		keywords: ["Dilip", "Dilip Badal", "About", "Software Engineer", "EDC Paris"],
 	},
-
-    // articles page removed
 
 	{
 		page: "projects",
 		description:
-			"I've worked on a variety of projects over the years and I'm proud of the progress I've made. Many of these projects are open-source and available for others to explore and contribute to.",
-		keywords: ["Dilip", "Dilip Badal", "Projects", "Open Source"],
+			"Explore a curated selection of Dilip Badal's engineering projects, including EDC Connect and various open-source contributions.",
+		keywords: ["Dilip", "Dilip Badal", "Projects", "Portfolio", "EDC Connect", "React"],
 	},
 
 	{
 		page: "contact",
 		description:
-			"If you're interested in collaborating on a project, feel free to reach out to me. I'm always open to new ideas and opportunities.",
-		keywords: ["Dilip", "Dilip Badal", "Contact"],
+			"Get in touch with Dilip Badal for project collaborations, engineering opportunities, or technical consulting.",
+		keywords: ["Dilip", "Dilip Badal", "Contact", "Hire Developer"],
 	},
 ];
 

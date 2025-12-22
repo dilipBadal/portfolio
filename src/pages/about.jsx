@@ -54,10 +54,13 @@ const About = () => {
 								<div className="about-image-container">
 									<div className="about-image-wrapper">
 										<img
-											src="ab1.png"
+											src={
+												process.env.PUBLIC_URL +
+												"/ab1.png"
+											}
 											alt="about"
 											className="about-image"
-											style={{ borderRadius: "10%" }}											
+											style={{ borderRadius: "10%" }}
 										/>
 									</div>
 								</div>

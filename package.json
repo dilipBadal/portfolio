@@ -7,7 +7,7 @@
 		"email": "workwithdilip1@gmail.com",
 		"url": "https://github.com/dilipBadal/"
 	},
-	"homepage": "https://dilipbadal.github.io/",
+	"homepage": "https://dilipbadal.github.io/portfolio",
 	"private": true,
 	"dependencies": {
 		"@fortawesome/fontawesome-svg-core": "^6.4.0",

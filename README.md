@@ -1,4 +1,4 @@
-# Reactfolio — Dilip Badal
+# Dilip Badal
 
 A modern, lightweight React portfolio site tailored for Dilip Badal. It features a clean layout, projects showcase, contact page, and a built‑in light/dark theme toggle with persisted preference.
 

@@ -8,7 +8,7 @@ import {
 	faGithub,
 	faStackOverflow,
 	faInstagram,
-	faLinkedin,	
+	faLinkedin,
 } from "@fortawesome/free-brands-svg-icons";
 
 import Logo from "../components/common/logo";
@@ -103,7 +103,10 @@ const Homepage = () => {
 								<div className="homepage-image-container">
 									<div className="homepage-image-wrapper">
 										<img
-											src="Dilip Badal.png"
+											src={
+												process.env.PUBLIC_URL +
+												"/Dilip Badal.png"
+											}
 											alt="about"
 											className="homepage-image"
 										/>
@@ -143,16 +146,6 @@ const Homepage = () => {
 									className="homepage-social-icon"
 								/>
 							</a>
-							{/* <a
-								href={INFO.socials.stackoverflow}
-								target="_blank"
-								rel="noreferrer"
-							>
-								<FontAwesomeIcon
-									icon={faStackOverflow}
-									className="homepage-social-icon"
-								/>
-							</a>
 							<a
 								href={INFO.socials.instagram}
 								target="_blank"
@@ -162,7 +155,7 @@ const Homepage = () => {
 									icon={faInstagram}
 									className="homepage-social-icon"
 								/>
-							</a> */}
+							</a>
 							<a
 								href={`mailto:${INFO.main.email}`}
 								target="_blank"
@@ -180,7 +173,7 @@ const Homepage = () => {
 						</div>
 
 						<div className="homepage-after-title">
-					{/* Articles section removed */}
+							{/* Articles section removed */}
 
 							<div className="homepage-works">
 								<Works />

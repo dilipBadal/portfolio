@@ -14,7 +14,14 @@ const Project = (props) => {
 				<Link to={link}>
 					<div className="project-container">
 						<div className="project-logo">
-							<img src={logo} alt="logo" />
+							<img
+								src={
+									logo.startsWith("http")
+										? logo
+										: process.env.PUBLIC_URL + logo
+								}
+								alt="logo"
+							/>
 						</div>
 						<div className="project-title">{title}</div>
 						<div className="project-description">{description}</div>

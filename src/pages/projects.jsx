@@ -39,11 +39,12 @@ const Projects = () => {
 					</div>
 					<div className="projects-container">
 						<div className="title projects-title">
-							Some of the side projects I've worked on.
+							Building solutions with purpose and precision.
 						</div>
 
 						<div className="subtitle projects-subtitle">
-						This page highlights some of my personal and early side projects. At work, I've also built applications involving large language models, AI-powered voice solutions, and other advanced technologies. Many of those projects aren't publicly shareable due to company policies and NDAs, but they've given me valuable experience with a wide range of frameworks and tools.</div>
+							I’ve worked on a variety of projects over the years, from social community platforms to AI-driven tools. These projects reflect my commitment to building scalable, user-centric solutions through modern technologies.
+						</div>
 						<div className="projects-list">
 							<AllProjects />
 						</div>
