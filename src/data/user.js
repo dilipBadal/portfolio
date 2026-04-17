@@ -204,20 +204,6 @@ const INFO = {
 			link: "https://github.com/dilipBadal/Chess-Game-Ai",
 			featured: false,
 		},
-		{
-			title: "Dynamic Quiz Engine",
-			category: "Interactive Product",
-			year: "2023",
-			description:
-				"An API-powered quiz experience designed around category control, difficulty tuning, and a state flow that stays clean under constant interaction.",
-			outcome:
-				"Focused on delivering a small product with quick feedback loops and a polished flow.",
-			stack: ["Python", "API Integration", "State Management"],
-			logo: "https://cdn.jsdelivr.net/npm/programming-languages-logos/src/python/python.png",
-			linkText: "View source",
-			link: "https://github.com/dilipBadal/Quiz_it",
-			featured: false,
-		},
 	],
 
 	works: [

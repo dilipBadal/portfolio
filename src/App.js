@@ -1,13 +1,11 @@
 import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-import ReactGA from "react-ga4";
 
 import Homepage from "./pages/homepage";
 import About from "./pages/about";
 import Projects from "./pages/projects";
 import Contact from "./pages/contact";
 import Notfound from "./pages/404";
-import { TRACKING_ID } from "./data/tracking";
 import "./app.css";
 
 import { HelmetProvider } from "react-helmet-async";
@@ -15,10 +13,6 @@ import { HelmetProvider } from "react-helmet-async";
 function App() {
 	useEffect(() => {
 		document.documentElement.setAttribute("data-theme", "noir");
-
-		if (TRACKING_ID !== "") {
-			ReactGA.initialize(TRACKING_ID);
-		}
 
 		const handlePointerMove = (event) => {
 			document.documentElement.style.setProperty(
