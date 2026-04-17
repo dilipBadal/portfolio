@@ -1,15 +1,11 @@
-import React, { useEffect } from "react";
-import { Helmet } from "react-helmet";
+import { useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 
-import NavBar from "../components/common/navBar";
-import Footer from "../components/common/footer";
-import Logo from "../components/common/logo";
+import SiteLayout from "../components/common/siteLayout";
+import Reveal from "../components/common/reveal";
 import AllProjects from "../components/projects/allProjects";
-
 import INFO from "../data/user";
 import SEO from "../data/seo";
-
-import "./styles/projects.css";
 
 const Projects = () => {
 	useEffect(() => {
@@ -19,42 +15,44 @@ const Projects = () => {
 	const currentSEO = SEO.find((item) => item.page === "projects");
 
 	return (
-		<React.Fragment>
+		<>
 			<Helmet>
 				<title>{`Projects | ${INFO.main.title}`}</title>
 				<meta name="description" content={currentSEO.description} />
-				<meta
-					name="keywords"
-					content={currentSEO.keywords.join(", ")}
-				/>
+				<meta name="keywords" content={currentSEO.keywords.join(", ")} />
 			</Helmet>
 
-			<div className="page-content">
-				<NavBar active="projects" />
-				<div className="content-wrapper">
-					<div className="projects-logo-container">
-						<div className="projects-logo">
-							<Logo width={46} />
-						</div>
-					</div>
-					<div className="projects-container">
-						<div className="title projects-title">
-							Building solutions with purpose and precision.
-						</div>
+			<SiteLayout active="projects">
+				<section className="page-section page-hero">
+					<Reveal className="section-heading page-heading page-heading-wide">
+						<div className="eyebrow">Projects</div>
+						<h1>{INFO.projectsPage.title}</h1>
+						<p>{INFO.projectsPage.description}</p>
+					</Reveal>
+				</section>
 
-						<div className="subtitle projects-subtitle">
-							I’ve worked on a variety of projects over the years, from social community platforms to AI-driven tools. These projects reflect my commitment to building scalable, user-centric solutions through modern technologies.
-						</div>
-						<div className="projects-list">
-							<AllProjects />
-						</div>
+				<section className="page-section">
+					<AllProjects />
+				</section>
+
+				<section className="page-section">
+					<Reveal className="section-heading">
+						<div className="eyebrow">Process</div>
+						<h2>My build process is part engineering, part choreography.</h2>
+					</Reveal>
+
+					<div className="process-grid">
+						{INFO.projectsPage.process.map((item, index) => (
+							<Reveal key={item.step} delay={index * 100} className="process-card">
+								<div className="process-step">{item.step}</div>
+								<h3>{item.title}</h3>
+								<p>{item.body}</p>
+							</Reveal>
+						))}
 					</div>
-					<div className="page-footer">
-						<Footer />
-					</div>
-				</div>
-			</div>
-		</React.Fragment>
+				</section>
+			</SiteLayout>
+		</>
 	);
 };
 

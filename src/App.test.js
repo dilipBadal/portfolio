@@ -1,8 +1,19 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import "@testing-library/jest-dom";
+import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router-dom";
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+import App from "./App";
+
+test("renders the redesigned home hero", () => {
+	window.scrollTo = jest.fn();
+
+	render(
+		<MemoryRouter>
+			<App />
+		</MemoryRouter>,
+	);
+
+	expect(
+		screen.getByText(/I build digital experiences that feel sharp/i),
+	).toBeInTheDocument();
 });

@@ -1,35 +1,30 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
-import "./style/article.css";
+import TiltPanel from "../common/tiltPanel";
 
-const Article = (props) => {
-	const { date, title, description, link } = props;
-
+const Article = ({ note }) => {
 	return (
-		<React.Fragment>
-			<div className="article">
-				<div className="article-left-side">
-					<div className="article-date">{date}</div>
+		<Link to={`/articles/${note.slug}`} className="note-card-link">
+			<TiltPanel className="note-card">
+				<div className="note-card-meta">
+					<span>{note.date}</span>
+					<span>{note.readTime}</span>
 				</div>
-
-				<Link to={link}>
-					<div className="article-right-side">
-						<div className="article-title">{title}</div>
-						<div className="article-description">{description}</div>
-						<div className="article-link">
-							Read Article{" "}
-							<FontAwesomeIcon
-								style={{ fontSize: "10px" }}
-								icon={faChevronRight}
-							/>
-						</div>
-					</div>
-				</Link>
-			</div>
-		</React.Fragment>
+				<h3>{note.title}</h3>
+				<p>{note.description}</p>
+				<div className="note-card-tags">
+					{note.tags.map((tag) => (
+						<span key={tag}>{tag}</span>
+					))}
+				</div>
+				<div className="note-card-linkout">
+					Read note
+					<FontAwesomeIcon icon={faArrowRight} />
+				</div>
+			</TiltPanel>
+		</Link>
 	);
 };
 

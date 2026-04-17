@@ -1,83 +1,71 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
+import { faBarsStaggered, faArrowUpRightFromSquare, faXmark } from "@fortawesome/free-solid-svg-icons";
 
-import "./styles/navBar.css";
+import INFO from "../../data/user";
+import Logo from "./logo";
 
-const NavBar = (props) => {
-    const { active } = props;
+const navigation = [
+	{ key: "home", label: "Home", to: "/" },
+	{ key: "about", label: "About", to: "/about" },
+	{ key: "projects", label: "Projects", to: "/projects" },
+	{ key: "contact", label: "Contact", to: "/contact" },
+];
 
-    const [theme, setTheme] = useState("light");
+const NavBar = ({ active }) => {
+	const [menuOpen, setMenuOpen] = useState(false);
+	const location = useLocation();
 
-    useEffect(() => {
-        const current = document.documentElement.getAttribute("data-theme") || "light";
-        setTheme(current);
-    }, []);
-
-    const toggleTheme = () => {
-        const current = document.documentElement.getAttribute("data-theme") || "light";
-        const next = current === "dark" ? "light" : "dark";
-        document.documentElement.setAttribute("data-theme", next);
-        setTheme(next);
-        try {
-            localStorage.setItem("theme", next);
-        } catch (e) {}
-    };
+	useEffect(() => {
+		setMenuOpen(false);
+	}, [location.pathname]);
 
 	return (
-		<React.Fragment>
-			<div className="nav-container">
-				<nav className="navbar">
-					<div className="nav-background">
-						<ul className="nav-list">
-							<li
-								className={
-									active === "home"
-										? "nav-item active"
-										: "nav-item"
-								}
-							>
-								<Link to="/">Home</Link>
-							</li>
-							<li
-								className={
-									active === "about"
-										? "nav-item active"
-										: "nav-item"
-								}
-							>
-								<Link to="/about">About</Link>
-							</li>
-							<li
-								className={
-									active === "projects"
-										? "nav-item active"
-										: "nav-item"
-								}
-							>
-								<Link to="/projects">Projects</Link>
-							</li>
-					{/* Articles link removed */}
-							<li
-								className={
-									active === "contact"
-										? "nav-item active"
-										: "nav-item"
-								}
-							>
-								<Link to="/contact">Contact</Link>
-							</li>
-                            <li className="nav-item theme-toggle-item">
-                                <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
-                                    <FontAwesomeIcon icon={theme === "dark" ? faSun : faMoon} />
-                                </button>
-                            </li>
-                        </ul>
+		<header className="site-header">
+			<div className="site-header-inner">
+				<Link to="/" className="wordmark-wrap" aria-label={`${INFO.main.name} home`}>
+					<Logo />
+					<div className="wordmark-copy">
+						<div className="wordmark-name">{INFO.main.name}</div>
+						<div className="wordmark-role">{INFO.main.role}</div>
 					</div>
+				</Link>
+
+				<nav className={`main-nav ${menuOpen ? "is-open" : ""}`} aria-label="Primary">
+					{navigation.map((item) => (
+						<Link
+							key={item.key}
+							to={item.to}
+							className={`main-nav-link ${active === item.key ? "is-active" : ""}`}
+						>
+							{item.label}
+						</Link>
+					))}
 				</nav>
+
+				<div className="site-header-actions">
+					<a
+						href={INFO.socials.github}
+						target="_blank"
+						rel="noreferrer"
+						className="header-pill"
+					>
+						GitHub
+						<FontAwesomeIcon icon={faArrowUpRightFromSquare} />
+					</a>
+					<button
+						type="button"
+						className="menu-toggle"
+						onClick={() => setMenuOpen((current) => !current)}
+						aria-expanded={menuOpen}
+						aria-label={menuOpen ? "Close navigation" : "Open navigation"}
+					>
+						<FontAwesomeIcon icon={menuOpen ? faXmark : faBarsStaggered} />
+					</button>
+				</div>
 			</div>
-		</React.Fragment>
+		</header>
 	);
 };
 

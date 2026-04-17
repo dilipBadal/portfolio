@@ -1,83 +1,82 @@
-import React, { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { Helmet } from "react-helmet";
-import styled from "styled-components";
+import { useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
-import NavBar from "../components/common/navBar";
-import Footer from "../components/common/footer";
-import Logo from "../components/common/logo";
-
+import SiteLayout from "../components/common/siteLayout";
+import Reveal from "../components/common/reveal";
 import INFO from "../data/user";
-import myArticles from "../data/articles";
-
-import "./styles/readArticle.css";
-
-let ArticleStyle = styled.div``;
 
 const ReadArticle = () => {
-	const navigate = useNavigate();
-	let { slug } = useParams();
-
-	const article = myArticles[slug - 1];
+	const { slug } = useParams();
+	const note = INFO.notes.find((item) => item.slug === slug) || INFO.notes[Number(slug) - 1];
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
-	}, [article]);
+	}, [slug]);
 
-	ArticleStyle = styled.div`
-		${article().style}
-	`;
+	if (!note) {
+		return (
+			<SiteLayout active="articles">
+				<section className="page-section page-hero">
+					<div className="section-heading page-heading">
+						<div className="eyebrow">Note not found</div>
+						<h1>The thought escaped into the void.</h1>
+						<p>This note does not exist anymore, or the link is outdated.</p>
+						<Link to="/articles" className="button button-primary">
+							Back to notes
+						</Link>
+					</div>
+				</section>
+			</SiteLayout>
+		);
+	}
 
 	return (
-		<React.Fragment>
+		<>
 			<Helmet>
-				<title>{`${article().title} | ${INFO.main.title}`}</title>
-				<meta name="description" content={article().description} />
-				<meta name="keywords" content={article().keywords.join(", ")} />
+				<title>{`${note.title} | ${INFO.main.title}`}</title>
+				<meta name="description" content={note.description} />
+				<meta name="keywords" content={note.tags.join(", ")} />
 			</Helmet>
 
-			<div className="page-content">
-				<NavBar />
-
-				<div className="content-wrapper">
-					<div className="read-article-logo-container">
-						<div className="read-article-logo">
-							<Logo width={46} />
+			<SiteLayout active="articles">
+				<section className="page-section article-shell">
+					<Reveal className="article-hero">
+						<Link to="/articles" className="article-back-link">
+							Back to notes
+						</Link>
+						<div className="article-meta">
+							<span>{note.date}</span>
+							<span>{note.readTime}</span>
 						</div>
+						<h1>{note.title}</h1>
+						<p>{note.description}</p>
+					</Reveal>
+
+					<div className="article-sections">
+						{note.sections.map((section, index) => (
+							<Reveal key={section.title} delay={index * 80} className="article-section">
+								<h2>{section.title}</h2>
+								{section.paragraphs.map((paragraph) => (
+									<p key={paragraph}>{paragraph}</p>
+								))}
+							</Reveal>
+						))}
 					</div>
 
-					<div className="read-article-container">
-						<div className="read-article-back">
-							<img
-								src="../back-button.png"
-								alt="back"
-								className="read-article-back-button"
-								onClick={() => navigate(-1)}
-							/>
-						</div>
-
-						<div className="read-article-wrapper">
-							<div className="read-article-date-container">
-								<div className="read-article-date">
-									{article().date}
+					<Reveal className="takeaway-panel">
+						<div className="eyebrow">Takeaways</div>
+						<div className="takeaway-list">
+							{note.takeaways.map((takeaway) => (
+								<div key={takeaway} className="takeaway-item">
+									{takeaway}
 								</div>
-							</div>
-
-							<div className="title read-article-title">
-								{article().title}
-							</div>
-
-							<div className="read-article-body">
-								<ArticleStyle>{article().body}</ArticleStyle>
-							</div>
+							))}
 						</div>
-					</div>
-					<div className="page-footer">
-						<Footer />
-					</div>
-				</div>
-			</div>
-		</React.Fragment>
+					</Reveal>
+				</section>
+			</SiteLayout>
+		</>
 	);
 };
 

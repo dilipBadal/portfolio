@@ -1,91 +1,57 @@
-import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
-import {
-	faTwitter,
-	faGithub,
-	faLinkedin,
-	faInstagram,
-} from "@fortawesome/free-brands-svg-icons";
+import { faEnvelope, faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
+import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 
 import INFO from "../../data/user";
 
-import "./styles/socials.css";
+const socials = [
+	{
+		label: "GitHub",
+		value: "@dilipBadal",
+		href: INFO.socials.github,
+		icon: faGithub,
+	},
+	{
+		label: "LinkedIn",
+		value: "Professional profile",
+		href: INFO.socials.linkedin,
+		icon: faLinkedin,
+	},
+	{
+		label: "Email",
+		value: INFO.main.email,
+		href: `mailto:${INFO.main.email}`,
+		icon: faEnvelope,
+	},
+];
 
 const Socials = () => {
 	return (
-		<div className="socials">
-			{/* <div className="social">
-				<a href={INFO.socials.twitter} target="_blank" rel="noreferrer">
-					<div className="social-icon">
-						<FontAwesomeIcon
-							icon={faTwitter}
-							className="social-icon"
-						/>
-					</div>
-					<div className="social-text">Follow on Twitter</div>
-				</a>
-			</div> */}
+		<div className="social-grid">
+			{socials.map((social) => {
+				const isEmail = social.label === "Email";
 
-			<div className="social">
-				<a href={INFO.socials.github} target="_blank" rel="noreferrer">
-					<div className="social-icon">
-						<FontAwesomeIcon
-							icon={faGithub}
-							className="social-icon"
-						/>
-					</div>
-					<div className="social-text">Follow on GitHub</div>
-				</a>
-			</div>
-
-			<div className="social">
-				<a
-					href={INFO.socials.linkedin}
-					target="_blank"
-					rel="noreferrer"
-				>
-					<div className="social-icon">
-						<FontAwesomeIcon
-							icon={faLinkedin}
-							className="social-icon"
-						/>
-					</div>
-					<div className="social-text">Follow on LinkedIn</div>
-				</a>
-			</div>
-
-			<div className="social">
-				<a
-					href={INFO.socials.instagram}
-					target="_blank"
-					rel="noreferrer"
-				>
-					<div className="social-icon">
-						<FontAwesomeIcon
-							icon={faInstagram}
-							className="social-icon"
-						/>
-					</div>
-					<div className="social-text">Follow on Instagram</div>
-				</a>
-			</div>
-
-			<div className="email">
-				<div className="email-wrapper">
+				return (
 					<a
-						href={`mailto:${INFO.main.email}`}
-						target="_blank"
-						rel="noreferrer"
+						key={social.label}
+						href={social.href}
+						target={isEmail ? undefined : "_blank"}
+						rel={isEmail ? undefined : "noreferrer"}
+						className={`social-card ${isEmail ? "social-card-full" : ""}`}
 					>
-						<div className="social-icon">
-							<FontAwesomeIcon icon={faEnvelope} />
+						<div className="social-card-icon">
+							<FontAwesomeIcon icon={social.icon} />
 						</div>
-
-						<div className="social-text">{INFO.main.email}</div>
+						<div className="social-card-copy">
+							<div className="social-card-label">{social.label}</div>
+							<div className="social-card-value">
+								{social.value}
+							</div>
+						</div>
+						<FontAwesomeIcon icon={faArrowUpRightFromSquare} className="social-card-arrow" />
 					</a>
-				</div>
-			</div>
+				);
+			})}
 		</div>
 	);
 };

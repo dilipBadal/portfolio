@@ -1,24 +1,18 @@
-import React from "react";
-
+import INFO from "../../data/user";
+import Reveal from "../common/reveal";
 import Project from "./project";
 
-import INFO from "../../data/user";
+const AllProjects = ({ featuredOnly = false }) => {
+	const projects = featuredOnly
+		? INFO.projects.filter((project) => project.featured)
+		: INFO.projects;
 
-import "./styles/allProjects.css";
-
-const AllProjects = () => {
 	return (
-		<div className="all-projects-container">
-			{INFO.projects.map((project, index) => (
-				<div className="all-projects-project" key={index}>
-					<Project
-						logo={project.logo}
-						title={project.title}
-						description={project.description}
-						linkText={project.linkText}
-						link={project.link}
-					/>
-				</div>
+		<div className="project-grid">
+			{projects.map((project, index) => (
+				<Reveal key={project.title} delay={index * 90}>
+					<Project project={project} />
+				</Reveal>
 			))}
 		</div>
 	);

@@ -1,41 +1,57 @@
-import React from "react";
-import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLink } from "@fortawesome/free-solid-svg-icons";
+import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
 
-import "./styles/project.css";
+import TiltPanel from "../common/tiltPanel";
 
-const Project = (props) => {
-	const { logo, title, description, linkText, link } = props;
+const Project = ({ project }) => {
+	const {
+		logo,
+		title,
+		category,
+		year,
+		description,
+		outcome,
+		stack,
+		linkText,
+		link,
+	} = project;
 
 	return (
-		<React.Fragment>
-			<div className="project">
-				<Link to={link}>
-					<div className="project-container">
-						<div className="project-logo">
-							<img
-								src={
-									logo.startsWith("http")
-										? logo
-										: process.env.PUBLIC_URL + logo
-								}
-								alt="logo"
-							/>
-						</div>
-						<div className="project-title">{title}</div>
-						<div className="project-description">{description}</div>
-						<div className="project-link">
-							<div className="project-link-icon">
-								<FontAwesomeIcon icon={faLink} />
-							</div>
-
-							<div className="project-link-text">{linkText}</div>
-						</div>
+		<a href={link} target="_blank" rel="noreferrer" className="project-card-link">
+			<TiltPanel className="project-card">
+				<div className="project-card-topline">
+					<div className="project-card-meta">
+						<span>{category}</span>
+						<span>{year}</span>
 					</div>
-				</Link>
-			</div>
-		</React.Fragment>
+					<div className="project-card-logo">
+						<img
+							src={logo.startsWith("http") ? logo : `${process.env.PUBLIC_URL}${logo}`}
+							alt={`${title} logo`}
+						/>
+					</div>
+				</div>
+
+				<div className="project-card-content">
+					<h3>{title}</h3>
+					<p>{description}</p>
+				</div>
+
+				<div className="project-card-bottom">
+					<div className="project-card-outcome">{outcome}</div>
+					<div className="project-card-stack">
+						{stack.map((item) => (
+							<span key={item}>{item}</span>
+						))}
+					</div>
+				</div>
+
+				<div className="project-card-linkout">
+					{linkText}
+					<FontAwesomeIcon icon={faArrowUpRightFromSquare} />
+				</div>
+			</TiltPanel>
+		</a>
 	);
 };
 

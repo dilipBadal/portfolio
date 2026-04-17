@@ -1,37 +1,18 @@
-import React from "react";
-import { Link } from "react-router-dom";
-
-import "./styles/footer.css";
+import INFO from "../../data/user";
 
 const Footer = () => {
 	return (
-		<React.Fragment>
-			<div className="footer">
-				<div className="footer-links">
-					<ul className="footer-nav-link-list">
-						<li className="footer-nav-link-item">
-							<Link to="/">Home</Link>
-						</li>
-						<li className="footer-nav-link-item">
-							<Link to="/about">About</Link>
-						</li>
-						<li className="footer-nav-link-item">
-							<Link to="/projects">Projects</Link>
-						</li>
-					{/* Articles link removed */}
-						<li className="footer-nav-link-item">
-							<Link to="/contact">Contact</Link>
-						</li>
-					</ul>
-				</div>
+		<footer className="site-footer">
+			<div className="site-footer-inner">
 
-				<div className="footer-credits">
-					<div className="footer-credits-text">
-						© 2025 Dilip Badal. All Rights Reserved.
-					</div>
+				<a href={`mailto:${INFO.main.email}`} className="footer-email">
+					{INFO.main.email}
+				</a>
+				<div className="footer-copyright">
+					© {new Date().getFullYear()} {INFO.main.name}
 				</div>
 			</div>
-		</React.Fragment>
+		</footer>
 	);
 };
 

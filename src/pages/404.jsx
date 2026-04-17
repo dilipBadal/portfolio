@@ -1,50 +1,34 @@
-import React, { useEffect } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
 
-import { faFaceSadTear } from "@fortawesome/free-regular-svg-icons";
-
-import NavBar from "../components/common/navBar";
-import Logo from "../components/common/logo";
-
+import SiteLayout from "../components/common/siteLayout";
+import Reveal from "../components/common/reveal";
 import INFO from "../data/user";
 
-import "./styles/404.css";
-
 const Notfound = () => {
-	useEffect(() => {
-		document.title = `404 | ${INFO.main.title}`;
-	}, []);
-
 	return (
-		<React.Fragment>
-			<div className="not-found page-content">
-				<NavBar />
-				<div className="content-wrapper">
-					<div className="notfound-logo-container">
-						<div className="projects-logo">
-							<Logo width={46} />
-						</div>
-					</div>
-					<div className="notfound-container">
-						<div className="notfound-message">
-							<div className="notfound-title">
-								Oops! <FontAwesomeIcon icon={faFaceSadTear} />
-							</div>
-							<div className="not-found-message">
-								We can't seem to find the page you're looking
-								for.
-								<br />
-								The requested URL "{window.location.href}" was
-								not found on this server.
-							</div>
-							<a href="/" className="not-found-link">
-								Go back to the home page
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</React.Fragment>
+		<>
+			<Helmet>
+				<title>{`404 | ${INFO.main.title}`}</title>
+			</Helmet>
+
+			<SiteLayout>
+				<section className="page-section notfound-shell">
+					<Reveal className="notfound-panel">
+						<div className="notfound-code">404</div>
+						<div className="eyebrow">Lost in the dark</div>
+						<h1>This page never made it into the final cut.</h1>
+						<p>
+							The link is broken, the route is gone, or the page was never meant
+							to be seen.
+						</p>
+						<Link to="/" className="button button-primary">
+							Return home
+						</Link>
+					</Reveal>
+				</section>
+			</SiteLayout>
+		</>
 	);
 };
 

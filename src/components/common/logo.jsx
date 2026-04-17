@@ -1,30 +1,13 @@
-import React from "react";
-import { Link } from "react-router-dom";
 
-import INFO from "../../data/user";
-
-import "./styles/logo.css";
-
-const Logo = (props) => {
-	let { width, link } = props;
-
-	if (link === undefined) {
-		link = true;
-	}
-
-	const imageElement = (
-		<img
-			src={process.env.PUBLIC_URL + INFO.main.logo}
-			alt="logo"
-			className="logo"
-			width={width}
-		/>
-	);
-
+const Logo = () => {
 	return (
-		<React.Fragment>
-			{link ? <Link to="/">{imageElement}</Link> : imageElement}
-		</React.Fragment>
+		<div className="logo-mark" aria-hidden="true">
+			<img
+				src={`${process.env.PUBLIC_URL}/logo.png`}
+				alt="Logo"
+				style={{ width: "100%", height: "100%", objectFit: "cover" }}
+			/>
+		</div>
 	);
 };
 

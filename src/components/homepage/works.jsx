@@ -1,43 +1,33 @@
-import React from "react";
-import { faBriefcase } from "@fortawesome/free-solid-svg-icons";
-
-import Card from "../common/card";
+import TiltPanel from "../common/tiltPanel";
 import INFO from "../../data/user";
-
-import "./styles/works.css";
 
 const Works = () => {
 	return (
-		<div className="works">
-			<Card
-				icon={faBriefcase}
-				title="Work"
-				body={
-					<div className="works-body">
-						{INFO.works.map((work, index) => (
-							<div
-								className="work"
-								key={index}
-								onClick={() => window.open(work.link, "_blank")}
-								style={{ cursor: "pointer" }}
-							>
+		<div className="experience-grid">
+			{INFO.works.map((work) => (
+				<a
+					key={`${work.company}-${work.position}`}
+					href={work.link}
+					target="_blank"
+					rel="noreferrer"
+					className="experience-card-link"
+				>
+					<TiltPanel className="experience-card">
+						<div className="experience-card-topline">
+							<div className="experience-logo">
 								<img
-									src={process.env.PUBLIC_URL + work.logo}
+									src={`${process.env.PUBLIC_URL}${work.logo}`}
 									alt={work.company}
-									className="work-image"
 								/>
-								<div className="work-title">{work.company}</div>
-								<div className="work-subtitle">
-									{work.position}
-								</div>
-								<div className="work-duration">
-									{work.duration}
-								</div>
 							</div>
-						))}
-					</div>
-				}
-			/>
+							<div className="experience-duration">{work.duration}</div>
+						</div>
+						<h3>{work.position}</h3>
+						<div className="experience-company">{work.company}</div>
+						<p>{work.summary}</p>
+					</TiltPanel>
+				</a>
+			))}
 		</div>
 	);
 };

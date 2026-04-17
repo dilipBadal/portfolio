@@ -1,35 +1,70 @@
 import { useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import ReactGA from "react-ga4";
 
 import Homepage from "./pages/homepage";
 import About from "./pages/about";
 import Projects from "./pages/projects";
-// Articles removed
 import Contact from "./pages/contact";
 import Notfound from "./pages/404";
-
 import { TRACKING_ID } from "./data/tracking";
 import "./app.css";
 
+import { HelmetProvider } from "react-helmet-async";
+
 function App() {
 	useEffect(() => {
+		document.documentElement.setAttribute("data-theme", "noir");
+
 		if (TRACKING_ID !== "") {
 			ReactGA.initialize(TRACKING_ID);
 		}
+
+		const handlePointerMove = (event) => {
+			document.documentElement.style.setProperty(
+				"--pointer-x",
+				`${event.clientX}px`,
+			);
+			document.documentElement.style.setProperty(
+				"--pointer-y",
+				`${event.clientY}px`,
+			);
+		};
+
+		const handleScroll = () => {
+			const scrollableHeight =
+				document.documentElement.scrollHeight - window.innerHeight;
+			const progress =
+				scrollableHeight > 0 ? window.scrollY / scrollableHeight : 0;
+
+			document.documentElement.style.setProperty(
+				"--scroll-progress",
+				progress.toFixed(4),
+			);
+		};
+
+		handleScroll();
+		window.addEventListener("pointermove", handlePointerMove);
+		window.addEventListener("scroll", handleScroll, { passive: true });
+
+		return () => {
+			window.removeEventListener("pointermove", handlePointerMove);
+			window.removeEventListener("scroll", handleScroll);
+		};
 	}, []);
 
 	return (
-		<div className="App">
-			<Routes>
-				<Route path="/" element={<Homepage />} />
-				<Route path="/about" element={<About />} />
-				<Route path="/projects" element={<Projects />} />
-				{/* Articles routes removed */}
-				<Route path="/contact" element={<Contact />} />
-				<Route path="*" element={<Notfound />} />
-			</Routes>
-		</div>
+		<HelmetProvider>
+			<div className="App">
+				<Routes>
+					<Route path="/" element={<Homepage />} />
+					<Route path="/about" element={<About />} />
+					<Route path="/projects" element={<Projects />} />
+					<Route path="/contact" element={<Contact />} />
+					<Route path="*" element={<Notfound />} />
+				</Routes>
+			</div>
+		</HelmetProvider>
 	);
 }
 

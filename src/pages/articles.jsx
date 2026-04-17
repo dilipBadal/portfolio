@@ -1,16 +1,11 @@
-import React, { useEffect } from "react";
-import { Helmet } from "react-helmet";
+import { useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 
-import NavBar from "../components/common/navBar";
-import Footer from "../components/common/footer";
-import Logo from "../components/common/logo";
+import SiteLayout from "../components/common/siteLayout";
+import Reveal from "../components/common/reveal";
 import Article from "../components/articles/article";
-
 import INFO from "../data/user";
 import SEO from "../data/seo";
-import myArticles from "../data/articles";
-
-import "./styles/articles.css";
 
 const Articles = () => {
 	useEffect(() => {
@@ -20,59 +15,33 @@ const Articles = () => {
 	const currentSEO = SEO.find((item) => item.page === "articles");
 
 	return (
-		<React.Fragment>
+		<>
 			<Helmet>
-				<title>{`Articles | ${INFO.main.title}`}</title>
+				<title>{`Notes | ${INFO.main.title}`}</title>
 				<meta name="description" content={currentSEO.description} />
-				<meta
-					name="keywords"
-					content={currentSEO.keywords.join(", ")}
-				/>
+				<meta name="keywords" content={currentSEO.keywords.join(", ")} />
 			</Helmet>
 
-			<div className="page-content">
-				<NavBar active="articles" />
-				<div className="content-wrapper">
-					<div className="articles-logo-container">
-						<div className="articles-logo">
-							<Logo width={46} />
-						</div>
-					</div>
+			<SiteLayout active="articles">
+				<section className="page-section page-hero">
+					<Reveal className="section-heading page-heading">
+						<div className="eyebrow">Notes</div>
+						<h1>{INFO.notesPage.title}</h1>
+						<p>{INFO.notesPage.description}</p>
+					</Reveal>
+				</section>
 
-					<div className="articles-main-container">
-						<div className="title articles-title">
-							{INFO.articles.title}
-						</div>
-
-						<div className="subtitle articles-subtitle">
-							{INFO.articles.description}
-						</div>
-
-						<div className="articles-container">
-							<div className="articles-wrapper">
-								{myArticles.map((article, index) => (
-									<div
-										className="articles-article"
-										key={(index + 1).toString()}
-									>
-										<Article
-											key={(index + 1).toString()}
-											date={article().date}
-											title={article().title}
-											description={article().description}
-											link={"/article/" + (index + 1)}
-										/>
-									</div>
-								))}
-							</div>
-						</div>
+				<section className="page-section">
+					<div className="note-grid">
+						{INFO.notes.map((note, index) => (
+							<Reveal key={note.slug} delay={index * 90}>
+								<Article note={note} />
+							</Reveal>
+						))}
 					</div>
-					<div className="page-footer">
-						<Footer />
-					</div>
-				</div>
-			</div>
-		</React.Fragment>
+				</section>
+			</SiteLayout>
+		</>
 	);
 };
 

@@ -2,29 +2,57 @@ const SEO = [
 	{
 		page: "home",
 		description:
-			"Dilip Badal | Full-Stack Engineer specializing in scalable web and mobile architecture, Node.js, and Data Science.",
-		keywords: ["Dilip", "Dilip Badal", "Full Stack Engineer", "Paris Developer", "React Native", "Data Science"],
+			"Dilip Badal is a Paris-based full-stack engineer creating cinematic, high-performance digital experiences across web, mobile, and product systems.",
+		keywords: [
+			"Dilip Badal",
+			"Full-Stack Engineer",
+			"Paris Developer",
+			"React Developer",
+			"Product Engineer",
+		],
 	},
-
 	{
 		page: "about",
 		description:
-			"Learn more about Dilip Badal, a Full-Stack Engineer and Data Science student at EDC Paris, dedicated to building impact-driven digital solutions.",
-		keywords: ["Dilip", "Dilip Badal", "About", "Software Engineer", "EDC Paris"],
+			"Learn about Dilip Badal's approach to full-stack engineering, motion-led interfaces, and building digital products that feel premium and clear.",
+		keywords: [
+			"Dilip Badal About",
+			"Product Engineer",
+			"Full Stack Portfolio",
+			"Paris Software Engineer",
+		],
 	},
-
 	{
 		page: "projects",
 		description:
-			"Explore a curated selection of Dilip Badal's engineering projects, including EDC Connect and various open-source contributions.",
-		keywords: ["Dilip", "Dilip Badal", "Projects", "Portfolio", "EDC Connect", "React"],
+			"Explore selected projects by Dilip Badal spanning community platforms, social products, AI systems, and interactive digital experiences.",
+		keywords: [
+			"Dilip Badal Projects",
+			"React Portfolio",
+			"AI Projects",
+			"Community Platform Developer",
+		],
 	},
-
+	{
+		page: "articles",
+		description:
+			"Notes by Dilip Badal on interface feel, motion, performance, and engineering choices that shape premium product experiences.",
+		keywords: [
+			"Dilip Badal Notes",
+			"Frontend Motion",
+			"Interface Design",
+			"Engineering Essays",
+		],
+	},
 	{
 		page: "contact",
 		description:
-			"Get in touch with Dilip Badal for project collaborations, engineering opportunities, or technical consulting.",
-		keywords: ["Dilip", "Dilip Badal", "Contact", "Hire Developer"],
+			"Contact Dilip Badal for freelance work, internships, full-time roles, or collaboration on ambitious product experiences.",
+		keywords: [
+			"Dilip Badal Contact",
+			"Hire Full Stack Engineer",
+			"Freelance React Developer",
+		],
 	},
 ];
 
