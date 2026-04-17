@@ -13,7 +13,7 @@ test("renders the redesigned home hero", () => {
 		</MemoryRouter>,
 	);
 
-	expect(
-		screen.getByText(/I build digital experiences that feel sharp/i),
+expect(
+		screen.getByText(/I build sharp, cinematic digital experiences\./i),
 	).toBeInTheDocument();
 });

@@ -30,9 +30,12 @@ const Homepage = () => {
 			<SiteLayout active="home">
 				<section className="page-section hero-section">
 					<Reveal className="hero-grid">
-						<div className="hero-copy">
+						<div className="hero-copy hero-copy-intro">
 							<div className="eyebrow">{INFO.homepage.label}</div>
 							<h1>{INFO.homepage.title}</h1>
+						</div>
+
+						<div className="hero-copy hero-copy-body">
 							<p className="hero-lead">{INFO.homepage.description}</p>
 							<p className="hero-secondary">{INFO.homepage.secondary}</p>
 
@@ -65,7 +68,7 @@ const Homepage = () => {
 							</div>
 						</div>
 
-						<div className="hero-right">
+						<div className="hero-visual-column">
 							<TiltPanel className="hero-visual">
 								<div className="hero-visual-rings hero-visual-rings-one" />
 								<div className="hero-visual-rings hero-visual-rings-two" />
@@ -78,15 +81,15 @@ const Homepage = () => {
 								</div>
 
 							</TiltPanel>
+						</div>
 
-							<div className="metric-row">
-								{INFO.homepage.metrics.map((metric) => (
-									<div key={metric.label} className="metric-card">
-										<div className="metric-value">{metric.value}</div>
-										<div className="metric-label">{metric.label}</div>
-									</div>
-								))}
-							</div>
+						<div className="metric-row hero-metrics">
+							{INFO.homepage.metrics.map((metric) => (
+								<div key={metric.label} className="metric-card">
+									<div className="metric-value">{metric.value}</div>
+									<div className="metric-label">{metric.label}</div>
+								</div>
+							))}
 						</div>
 					</Reveal>
 				</section>
