@@ -1,139 +1,69 @@
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowDown, faArrowRight, faLocationDot } from "@fortawesome/free-solid-svg-icons";
-
 import SiteLayout from "../components/common/siteLayout";
-import Reveal from "../components/common/reveal";
-import TiltPanel from "../components/common/tiltPanel";
+import PageMeta from "../components/common/pageMeta";
+import Portrait from "../components/common/portrait";
+import ContactCta from "../components/common/contactCta";
+import Icon from "../components/common/icon";
 import AllProjects from "../components/projects/allProjects";
-import Works from "../components/homepage/works";
-import INFO from "../data/user";
-import SEO from "../data/seo";
+import ToolGroups from "../components/about/toolGroups";
+import BrandLogo from "../components/common/brandLogo";
 
-const Homepage = () => {
-	useEffect(() => {
-		window.scrollTo(0, 0);
-	}, []);
+function scrollToWork(event) {
+  event.preventDefault();
+  const reducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+  document.getElementById("selected-work")?.scrollIntoView({
+    behavior: reducedMotion ? "auto" : "smooth",
+  });
+}
 
-	const currentSEO = SEO.find((item) => item.page === "home");
-
-	return (
-		<>
-			<Helmet>
-				<title>{INFO.main.title}</title>
-				<meta name="description" content={currentSEO.description} />
-				<meta name="keywords" content={currentSEO.keywords.join(", ")} />
-			</Helmet>
-
-			<SiteLayout active="home">
-				<section className="page-section hero-section">
-					<Reveal className="hero-grid">
-						<div className="hero-copy hero-copy-intro">
-							<div className="eyebrow">{INFO.homepage.label}</div>
-							<h1>{INFO.homepage.title}</h1>
-						</div>
-
-						<div className="hero-copy hero-copy-body">
-							<p className="hero-lead">{INFO.homepage.description}</p>
-							<p className="hero-secondary">{INFO.homepage.secondary}</p>
-
-							<div className="hero-actions">
-								<a 
-									href="#featured-work" 
-									className="button button-primary"
-									onClick={(e) => {
-										e.preventDefault();
-										document.querySelector("#featured-work")?.scrollIntoView({
-											behavior: "smooth",
-										});
-									}}
-								>
-									See featured work
-									<FontAwesomeIcon icon={faArrowDown} />
-								</a>
-								<Link to="/contact" className="button button-secondary">
-									Start a conversation
-									<FontAwesomeIcon icon={faArrowRight} />
-								</Link>
-							</div>
-
-							<div className="hero-location">
-								<FontAwesomeIcon icon={faLocationDot} />
-								<span>
-									{INFO.main.location}
-									{INFO.main.availability && ` / ${INFO.main.availability}`}
-								</span>
-							</div>
-						</div>
-
-						<div className="hero-visual-column">
-							<TiltPanel className="hero-visual">
-								<div className="hero-visual-rings hero-visual-rings-one" />
-								<div className="hero-visual-rings hero-visual-rings-two" />
-								<div className="hero-portrait-wrap">
-									<img
-										src={`${process.env.PUBLIC_URL}/Dilip Badal.png`}
-										alt={INFO.main.name}
-										className="hero-portrait"
-									/>
-								</div>
-
-							</TiltPanel>
-						</div>
-
-						<div className="metric-row hero-metrics">
-							{INFO.homepage.metrics.map((metric) => (
-								<div key={metric.label} className="metric-card">
-									<div className="metric-value">{metric.value}</div>
-									<div className="metric-label">{metric.label}</div>
-								</div>
-							))}
-						</div>
-					</Reveal>
-				</section>
-
-				<section className="ticker-shell" aria-label="Capabilities">
-					<div className="ticker-track">
-						{INFO.homepage.ticker.concat(INFO.homepage.ticker).map((item, index) => (
-							<span key={`${item}-${index}`}>{item}</span>
-						))}
-					</div>
-				</section>
-
-
-				<section className="page-section" id="featured-work">
-					<Reveal className="section-heading">
-						<div className="eyebrow">Featured work</div>
-						<h2>Products shaped to feel cleaner, smarter, and more alive.</h2>
-					</Reveal>
-					<AllProjects featuredOnly />
-				</section>
-
-				<section className="page-section">
-					<Reveal className="section-heading">
-						<div className="eyebrow">Experience</div>
-						<h2>Built in real environments where shipping matters.</h2>
-					</Reveal>
-					<Works />
-				</section>
-
-				<section className="page-section cta-section">
-					<Reveal className="cta-panel">
-						<div>
-							<div className="eyebrow">Ready when the brief is ambitious</div>
-							<h2>Need a site or product experience that actually lands?</h2>
-						</div>
-						<Link to="/contact" className="button button-primary">
-							Let's build it
-							<FontAwesomeIcon icon={faArrowRight} />
-						</Link>
-					</Reveal>
-				</section>
-			</SiteLayout>
-		</>
-	);
-};
-
-export default Homepage;
+export default function Homepage(props) {
+  return (
+    <SiteLayout active="home" {...props}>
+      <PageMeta />
+      <section className="home-hero">
+        <div className="hero-copy">
+          <p className="eyebrow">Data science & analytics · Paris, FR</p>
+          <h1>Dilip Badal<span className="accent">.</span></h1>
+          <h2>Better questions.<br /><span className="accent">Clearer insights.</span></h2>
+          <p className="hero-description">
+            An engineering foundation, a data-focused direction. I work with Python,
+            SQL, and BI to turn complex questions into useful insights.
+          </p>
+          <div className="hero-actions">
+            <a className="button button-primary" href="#selected-work" onClick={scrollToWork}>
+              Explore my work <Icon name="arrow" />
+            </a>
+            <Link className="text-link" to="/contact">Let’s talk <Icon name="arrow" /></Link>
+          </div>
+        </div>
+        <Portrait />
+      </section>
+      <section className="section" id="selected-work">
+        <div className="section-heading">
+          <h2>Selected work</h2>
+          <span className="heading-rule" />
+          <Link className="text-link" to="/projects">All projects <Icon name="arrow" /></Link>
+        </div>
+        <AllProjects featuredOnly />
+      </section>
+      <section className="section">
+        <div className="section-heading">
+          <h2>Tools & foundations</h2><span className="heading-rule" />
+        </div>
+        <div className="foundations-grid">
+          <ToolGroups />
+          <div className="foundation-details">
+            <div>
+              <h3>Currently studying</h3>
+              <p>Data Science & Business Intelligence<br />EDC Paris Business School · 2025–2027</p>
+            </div>
+            <div>
+              <h3>Previously</h3><div className="experience-summary"><BrandLogo src="/levich.svg" className="company-logo" /><p>Software engineering · Levich Solutions</p></div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <ContactCta />
+    </SiteLayout>
+  );
+}

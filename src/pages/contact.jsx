@@ -1,75 +1,76 @@
-import { useEffect } from "react";
-import { Helmet } from "react-helmet-async";
-
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import SiteLayout from "../components/common/siteLayout";
-import Reveal from "../components/common/reveal";
-import TiltPanel from "../components/common/tiltPanel";
-import Socials from "../components/about/socials";
+import PageMeta from "../components/common/pageMeta";
+import Icon from "../components/common/icon";
 import INFO from "../data/user";
-import SEO from "../data/seo";
 
-const Contact = () => {
-	useEffect(() => {
-		window.scrollTo(0, 0);
-	}, []);
+const topics = [
+  "Data science & analytics opportunities",
+  "Business intelligence & data products",
+  "Product engineering collaborations",
+];
+const socials = [
+  { name: "linkedin", label: "LinkedIn", detail: "Professional profile" },
+  { name: "github", label: "GitHub", detail: "@dilipBadal" },
+];
 
-	const currentSEO = SEO.find((item) => item.page === "contact");
+export default function Contact(props) {
+  const [copyStatus, setCopyStatus] = useState("");
+  const copied = copyStatus === "Email address copied.";
+  const copyAddress = async () => {
+    try {
+      await navigator.clipboard.writeText(INFO.main.email);
+      setCopyStatus("Email address copied.");
+    } catch {
+      setCopyStatus("Copy isn’t available. Select the email address above to copy it.");
+    }
+  };
 
-	return (
-		<>
-			<Helmet>
-				<title>{`Contact | ${INFO.main.title}`}</title>
-				<meta name="description" content={currentSEO.description} />
-				<meta name="keywords" content={currentSEO.keywords.join(", ")} />
-			</Helmet>
-
-			<SiteLayout active="contact">
-				<section className="page-section page-hero">
-					<Reveal className="section-heading page-heading page-heading-wide">
-						<div className="eyebrow">Contact</div>
-						<h1>{INFO.contact.title}</h1>
-						<p>{INFO.contact.description}</p>
-					</Reveal>
-				</section>
-
-				<section className="page-section contact-layout">
-					<Reveal>
-						<TiltPanel className="contact-panel">
-							<div className="eyebrow">Availability</div>
-							<h2>{INFO.contact.availability}</h2>
-							<p>{INFO.contact.response}</p>
-							<a
-								className="button button-primary"
-								href={`mailto:${INFO.main.email}`}
-							>
-								{INFO.main.email}
-							</a>
-						</TiltPanel>
-					</Reveal>
-
-					<Reveal delay={120}>
-						<div className="opportunity-list">
-							<div className="eyebrow">Best fit collaborations</div>
-							{INFO.contact.opportunities.map((opportunity, index) => (
-								<div key={opportunity} className="opportunity-item">
-									<span>0{index + 1}</span>
-									<p>{opportunity}</p>
-								</div>
-							))}
-						</div>
-					</Reveal>
-				</section>
-
-				<section className="page-section">
-					<Reveal className="section-heading">
-						<div className="eyebrow">Reach out</div>
-						<h2>Choose your lane. Email is fastest, socials stay open.</h2>
-					</Reveal>
-					<Socials />
-				</section>
-			</SiteLayout>
-		</>
-	);
-};
-
-export default Contact;
+  return (
+    <SiteLayout active="contact" {...props}>
+      <PageMeta title="Contact" />
+      <section className="page-intro contact-intro">
+        <p className="eyebrow">Get in touch</p>
+        <h1>Good conversations.<br /><span className="accent">Useful possibilities.</span></h1>
+        <p>Have a project, a data question, or an opportunity in mind?<br />I’d love to hear about it.</p>
+      </section>
+      <section className="email-panel">
+        <h2>Email is the best place to start.</h2>
+        <a className="contact-email" href={`mailto:${INFO.main.email}`}>{INFO.main.email}</a>
+        <div className="hero-actions">
+          <a className="button button-primary" href={`mailto:${INFO.main.email}`}>
+            <Icon name="email" /> Write an email <Icon name="arrow" />
+          </a>
+          <button className="copy-button" onClick={copyAddress}>
+            <Icon name={copied ? "check" : "copy"} /> {copied ? "Copied" : "Copy address"}
+          </button>
+        </div>
+        <p className="copy-status" role="status">{copyStatus}</p>
+      </section>
+      <section className="contact-columns">
+        <div>
+          <h2>What we can talk about</h2>
+          <ul className="conversation-list">{topics.map(item => <li key={item}>{item}</li>)}</ul>
+        </div>
+        <div>
+          <h2>Elsewhere</h2>
+          <div className="contact-socials">
+            {socials.map(item => (
+              <a key={item.name} href={INFO.socials[item.name]} target="_blank" rel="noopener noreferrer">
+                <Icon name={item.name} />
+                <div><h3>{item.label}</h3><p>{item.detail}</p></div>
+                <Icon name="arrow" />
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+      <div className="contact-location">
+        <Icon name="pin" />
+        <div><h3>Based in Paris, France</h3><p>Happy to connect about thoughtful work.</p></div>
+      </div>
+      <Link className="text-link back-to-work" to="/">Back to work <Icon name="arrow" /></Link>
+    </SiteLayout>
+  );
+}

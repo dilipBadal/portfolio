@@ -1,19 +1,2 @@
-import INFO from "../../data/user";
-
-const Footer = () => {
-	return (
-		<footer className="site-footer">
-			<div className="site-footer-inner">
-
-				<a href={`mailto:${INFO.main.email}`} className="footer-email">
-					{INFO.main.email}
-				</a>
-				<div className="footer-copyright">
-					© {new Date().getFullYear()} {INFO.main.name}
-				</div>
-			</div>
-		</footer>
-	);
-};
-
-export default Footer;
+import { Link } from "react-router-dom";
+export default function Footer() { return <footer className="site-footer"><span>© {new Date().getFullYear()} Dilip Badal.</span><span>Based in Paris, France.</span><Link to="/projects">All projects ↗</Link></footer>; }

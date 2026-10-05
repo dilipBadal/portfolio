@@ -1,18 +1,25 @@
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Footer from "./footer";
 import NavBar from "./navBar";
+import Sidebar from "./sidebar";
 
-const SiteLayout = ({ active, children }) => {
-	return (
-		<div className="site-shell">
-			<div className="site-progress" />
-			<div className="site-ambient site-ambient-one" />
-			<div className="site-ambient site-ambient-two" />
-			<div className="site-grid" />
-			<NavBar active={active} />
-			<main className="site-main">{children}</main>
-			<Footer />
-		</div>
-	);
-};
-
-export default SiteLayout;
+export default function SiteLayout({ active, theme, toggleTheme, children }) {
+  const { pathname } = useLocation();
+  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  const skipToContent = event => {
+    event.preventDefault();
+    document.getElementById("main-content")?.focus();
+  };
+  return (
+    <div className="site-shell">
+      <a href="#main-content" className="skip-link" onClick={skipToContent}>Skip to content</a>
+      <Sidebar />
+      <div className="site-content">
+        <NavBar active={active} theme={theme} toggleTheme={toggleTheme} />
+        <main id="main-content" tabIndex={-1}>{children}</main>
+        <Footer />
+      </div>
+    </div>
+  );
+}

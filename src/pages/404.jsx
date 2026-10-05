@@ -1,35 +1,4 @@
-import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-
 import SiteLayout from "../components/common/siteLayout";
-import Reveal from "../components/common/reveal";
-import INFO from "../data/user";
-
-const Notfound = () => {
-	return (
-		<>
-			<Helmet>
-				<title>{`404 | ${INFO.main.title}`}</title>
-			</Helmet>
-
-			<SiteLayout>
-				<section className="page-section notfound-shell">
-					<Reveal className="notfound-panel">
-						<div className="notfound-code">404</div>
-						<div className="eyebrow">Lost in the dark</div>
-						<h1>This page never made it into the final cut.</h1>
-						<p>
-							The link is broken, the route is gone, or the page was never meant
-							to be seen.
-						</p>
-						<Link to="/" className="button button-primary">
-							Return home
-						</Link>
-					</Reveal>
-				</section>
-			</SiteLayout>
-		</>
-	);
-};
-
-export default Notfound;
+import PageMeta from "../components/common/pageMeta";
+export default function Notfound(props) { return <SiteLayout {...props}><PageMeta title="Page not found" /><section className="page-intro notfound"><p className="eyebrow">404 · Page not found</p><h1>A wrong turn.<br /><span className="accent">An easy way back.</span></h1><p>This page doesn’t exist. Let’s get you back to the work.</p><Link className="button button-primary" to="/">Back to work ↗</Link></section></SiteLayout>; }

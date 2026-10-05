@@ -1,58 +1,32 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
+import Icon from "../common/icon";
+import BrandLogo from "../common/brandLogo";
 
-import TiltPanel from "../common/tiltPanel";
-
-const Project = ({ project }) => {
-	const {
-		logo,
-		title,
-		category,
-		year,
-		description,
-		outcome,
-		stack,
-		linkText,
-		link,
-	} = project;
-
-	return (
-		<a href={link} target="_blank" rel="noreferrer" className="project-card-link">
-			<TiltPanel className="project-card">
-				<div className="project-card-topline">
-					<div className="project-card-meta">
-						<span>{category}</span>
-						<span>{year}</span>
-					</div>
-					<div className="project-card-logo">
-						<img
-							src={logo.startsWith("http") ? logo : `${process.env.PUBLIC_URL}${logo}`}
-							alt={`${title} logo`}
-						/>
-					</div>
-				</div>
-
-				<div className="project-card-content">
-					<h3>{title}</h3>
-					<p>{description}</p>
-				</div>
-
-				<div className="project-card-bottom">
-					<div className="project-card-outcome">{outcome}</div>
-					<div className="project-card-stack">
-						{stack.map((item) => (
-							<span key={item}>{item}</span>
-						))}
-					</div>
-				</div>
-
-				<div className="project-card-linkout">
-					{linkText}
-					<FontAwesomeIcon icon={faArrowUpRightFromSquare} />
-				</div>
-			</TiltPanel>
-		</a>
-	);
-};
-
-export default Project;
+export default function Project({ project }) {
+  const content = (
+    <>
+      {project.logo ? <BrandLogo src={project.logo} className="project-logo" /> : (
+        <div className={`project-mark project-mark-${project.visual}`} aria-hidden="true">
+          {project.initials}
+        </div>
+      )}
+      <div className="project-copy">
+        <div className="project-title">
+          <h3>{project.title}</h3>
+          {project.isNew && <span className="project-badge">New project</span>}
+        </div>
+        <p>{project.description}</p>
+        <div className="project-stack">{project.stack?.join(" · ")}</div>
+      </div>
+      <div className={`project-art project-art-${project.visual}`} aria-hidden="true">
+        <span /><span /><span />
+      </div>
+      {project.link ? <Icon name="right" /> : <span className="project-pending">Details soon</span>}
+    </>
+  );
+  return project.link ? (
+    <a className="project-row" href={project.link} target="_blank" rel="noopener noreferrer"
+      aria-label={`${project.title} — ${project.linkText}`}>
+      {content}
+    </a>
+  ) : <article className="project-row">{content}</article>;
+}
