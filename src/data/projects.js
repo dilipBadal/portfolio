@@ -13,10 +13,11 @@ const projects = [
   { title: "StudaConnect", logo: "/studaconnect_logo.png", description: "A connected digital campus. A white-labeled social platform for universities.", visual: "campus", initials: "SC", stack: ["React Native", "Python", "PostgreSQL", "Supabase"], link: "https://www.studaconnect.com/", linkText: "Visit platform", featured: true },
   { title: "LÜVYN", logo: "/luvyn_logo.png", description: "A slower way to connect. An intentional dating platform built around paced interactions.", visual: "social", initials: "LÜ", stack: ["React", "Python", "PostgreSQL"], link: "https://www.luvyn.app", linkText: "Visit platform", featured: true },
   {
-    title: "PokeGuesser",
+    title: "PokéPal",
+    featured: true,
     description: "An end-to-end Pokémon data science project: data collection, exploration, and primary-type prediction from six base stats, with model comparisons in an interactive Streamlit dashboard.",
     visual: "campus",
-    initials: "PG",
+    initials: "PP",
     stack: ["Python", "Streamlit", "Pandas", "Scikit-learn", "Plotly"],
     link: "https://github.com/dilipBadal/PokeGuesser",
     linkText: "View source",
