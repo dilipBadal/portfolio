@@ -17,12 +17,9 @@
 .project-art-lens { background: var(--accent-soft); color: var(--accent-text); }
 .project-art-campus { background: var(--campus); color: var(--campus-ink); }
 .project-art-social { background: var(--social); color: var(--social-ink); }
-.project-art span { position: absolute; width: 170px; height: 90px; border: 1px solid currentColor; opacity: .35; border-radius: 50%; left: 10%; top: 18px; transform: rotate(-18deg); }
-.project-art span:nth-child(2) { left: 25%; top: 10px; }
-.project-art span:nth-child(3) { left: 40%; top: 4px; }
-.project-art-lens span { width: 110px; height: 110px; top: -18px; left: 10%; }
-.project-art-lens span:nth-child(2) { left: 35%; }
-.project-art-lens span:nth-child(3) { left: 60%; }
+.project-art svg { display: block; width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1.2; opacity: .45; }
+.project-art .pattern-node { fill: currentColor; stroke: none; }
+.project-art .pattern-square { fill: currentColor; stroke: none; opacity: .18; }
 .project-row > svg { color: var(--muted); font-size: 17px; justify-self: center; }
 .project-pending { font-size: 11px; color: var(--muted); grid-column: 4; text-align: right; }
 .projects-heading { margin-bottom: 24px; }

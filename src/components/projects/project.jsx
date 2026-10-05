@@ -1,5 +1,6 @@
 import Icon from "../common/icon";
 import BrandLogo from "../common/brandLogo";
+import ProjectPattern from "./projectPattern";
 
 export default function Project({ project }) {
   const content = (
@@ -17,9 +18,7 @@ export default function Project({ project }) {
         <p>{project.description}</p>
         <div className="project-stack">{project.stack?.join(" · ")}</div>
       </div>
-      <div className={`project-art project-art-${project.visual}`} aria-hidden="true">
-        <span /><span /><span />
-      </div>
+      <ProjectPattern visual={project.visual} pattern={project.pattern} />
       {project.link ? <Icon name="right" /> : <span className="project-pending">Details soon</span>}
     </>
   );
